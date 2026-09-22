@@ -1,12 +1,10 @@
-import type { CityType } from "../model/CityType";
+import { useCities } from "../contexts/CitiesContext";
 import CountryItem from "./CountryItem";
 import styles from "./CountryList.module.css";
 import Spinner from "./Spinner";
 
-export default function CountriesList({
-	cities,
-	isLoading,
-}: CountriesListProps) {
+export default function CountriesList() {
+	const { cities, isLoading } = useCities();
 	if (!cities?.length) return <h3>No countries found</h3>;
 
 	const countriesVisited: Country[] = [];
@@ -33,11 +31,6 @@ export default function CountriesList({
 		</>
 	);
 }
-
-type CountriesListProps = {
-	cities: CityType[] | undefined;
-	isLoading: boolean;
-};
 
 export type Country = {
 	country: string;

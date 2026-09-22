@@ -1,11 +1,13 @@
-import type { CityType } from "../model/CityType";
+import { useCities } from "../contexts/CitiesContext";
 import styles from "./CitiesList.module.css";
 import CityItem from "./CityItem";
 import Message from "./Message";
 import Spinner from "./Spinner";
 
-export default function CitiesList({ cities, isLoading }: CitiesListProps) {
-	if (!cities?.length)
+export default function CitiesList() {
+	const { cities, isLoading } = useCities();
+
+	if (cities.length === 0)
 		return <Message message="Please add a city by clicking on the map." />;
 	return (
 		<>
@@ -18,8 +20,3 @@ export default function CitiesList({ cities, isLoading }: CitiesListProps) {
 		</>
 	);
 }
-
-type CitiesListProps = {
-	cities: CityType[] | undefined;
-	isLoading: boolean;
-};
